@@ -59,11 +59,14 @@ The byte representation of the assembly code is `48 c7 c7 70 4b 4b 43 68 8c 17 4
 
 Now you need to find the address of the %rsp register and pass it as the return address since it will execute our injected code
 
-run ctarget through gdb `gdb ctarget`
+run ctarget through gdb 
+`gdb ctarget`
 
-set a breakpoint at getbuf `b getbuf`
+set a breakpoint at getbuf 
+`b getbuf`
 
-print all the registers `info r`
+print all the registers 
+`info r`
 
 That will prnt the addresses for all registers, grab the one for rsp
 

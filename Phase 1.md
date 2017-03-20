@@ -16,9 +16,9 @@ Dump of assembler code for function getbuf:
 => 0x0000000000401748 <+0>:	    sub    $0x18,%rsp
    0x000000000040174c <+4>:	    mov    %rsp,%rdi
    0x000000000040174f <+7>:	    callq  0x40198a <Gets>
-   0x0000000000401754 <+12>:	mov    $0x1,%eax
-   0x0000000000401759 <+17>:	add    $0x18,%rsp
-   0x000000000040175d <+21>:	retq   
+   0x0000000000401754 <+12>:	    mov    $0x1,%eax
+   0x0000000000401759 <+17>:	    add    $0x18,%rsp
+   0x000000000040175d <+21>:	    retq   
 End of assembler dump.
 ```
 
@@ -65,7 +65,7 @@ Now you need to take this file and run it through the program hex2raw, which wil
 
 Finally, you run the raw file
 
-`./ctarget < raw-phase.txt`
+`./ctarget < raw-phase1.txt`
 
 You will get something like below if your solution is right.
 

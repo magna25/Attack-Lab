@@ -67,6 +67,10 @@ set a breakpoint at getbuf
 
 `b getbuf`
 
+run ctarget
+
+`r`
+
 print all the registers 
 
 `info r`

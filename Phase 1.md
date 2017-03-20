@@ -72,7 +72,7 @@ You will get something like below if your solution is right.
 ```
 Cookie: 0x434b4b70 //your cookie will be different
 Type string:Touch1!: You called touch1()
-Valid solution for level 1 with target rtarget
+Valid solution for level 1 with target ctarget
 PASS: Sent exploit string to server to be validated.
 NICE JOB!
 ```

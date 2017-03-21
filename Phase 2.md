@@ -1,4 +1,4 @@
-Phase 2 involves injecting a little code and calling function touch2 while making it look like you passed the cookie as an argument to touch2
+Phase 2 involves injecting a small code and calling function touch2 while making it look like you passed the cookie as an argument to touch2
 
 If you look inside the rtarget and search for touch2, it looks something like this:
 

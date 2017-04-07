@@ -7,6 +7,8 @@ We will be storing it before the return address of getbuff (24 bytes)
 
 The return address of getbuf is %rsp + buffer, the buffer was 24 bytes so it will be %rsp + 24
 
+`0x18` = `24`
+
 we know, `%rsp = 0x55623840`
 
 Thus, return address = `0x55623840 + 0x18  = 0x55623858`

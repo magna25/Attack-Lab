@@ -1,4 +1,4 @@
-Phase 2 involves injecting a little code and calling function touch2 while making it look like you passed the cookie as an argument to touch2
+Phase 2 involves injecting a small code and calling function touch2 while making it look like you passed the cookie as an argument to touch2
 
 If you look inside the rtarget and search for touch2, it looks something like this:
 
@@ -59,11 +59,21 @@ The byte representation of the assembly code is `48 c7 c7 70 4b 4b 43 68 8c 17 4
 
 Now you need to find the address of the %rsp register and pass it as the return address since it will execute our injected code
 
-run ctarget through gdb `gdb ctarget`
+run ctarget through gdb 
 
-set a breakpoint at getbuf `b getbuf`
+`gdb ctarget`
 
-print all the registers `info r`
+set a breakpoint at getbuf 
+
+`b getbuf`
+
+run ctarget
+
+`r`
+
+print all the registers 
+
+`info r`
 
 That will prnt the addresses for all registers, grab the one for rsp
 

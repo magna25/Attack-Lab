@@ -45,7 +45,7 @@ Now, grab the bytes from the above code and start constructing your exploit stri
 28 38 62 55 00 00 00 00 /* return address of rsp-0x18, where the string will be stored*/
 34 33 34 62 34 62 37 30 /* cookie string*/
 ```
-If you look at the last row above, the cookie isn't in hex format, so you need to take your cookie and convert in to string format.
+If you look at the last row above, the cookie is in hex format, so you need to take your cookie and convert in to string format.
 Go to http://www.unit-conversion.info/texttools/hexadecimal/ and put in your cookie and it should give you the text format or you could look up ascii equivalent on your machine
 
 

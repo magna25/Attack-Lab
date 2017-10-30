@@ -7,7 +7,7 @@ We will be storing the cookie after touch3.
 
 So let's pass the address for the cookie to register $rdi
 
-The total bytes before the cookie are buffer + 8 bytes for return address of rsp + 8 bytes for touch3 
+The total bytes before the cookie are `buffer + 8 bytes for return address of rsp + 8 bytes for touch3` 
 
 `0x18 + 8 + 8 =  28` (40 Decimal)  
 

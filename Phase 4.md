@@ -42,7 +42,7 @@ The exploit we are doing is:
 
 ```
 popq %rax
-movq %rax %edi
+movq %rax %rdi
 ret 
 ```
 

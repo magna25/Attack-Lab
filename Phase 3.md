@@ -1,4 +1,4 @@
-Phase 3 is kinda similar to phase to except that we are trying to call the function touch3 and have to pass our cookie to it as string
+Phase 3 is kinda similar to phase two except that we are trying to call the function touch3 and have to pass our cookie to it as string
 
 In the instruction it tells you that if you store the cookie in the buffer allocated for getbuf, the functions hexmatch and strncmp
 may overwrite it as they will be pushing data on to the stack, so you have to be careful where you store it.

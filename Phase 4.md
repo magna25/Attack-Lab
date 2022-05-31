@@ -23,7 +23,7 @@ between start_farm and end_farm something like that. Now, search for 58 between 
 4018f3:	c3                   	retq   
 ```
 
-I found the above in the disassembled code and there might be more than one but you want the function where 58 is present on the outer right end.
+I found the above in the disassembled code and there might be more than one but take note of the address of 58, which will be used later.
 
 The other instruction you need is: `movq %rax %edi` and it's byte representation is `48 89 c7 c3` which is referenced in the pdf. 
 Go back to your disassembled code and search for that byte code.
